@@ -1,17 +1,25 @@
 import { SendHorizonal } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Msg, MessageBox } from "./MessageBox";
-
+const URL = '0.0.0.0:8000'
 
 
 export function ChatInterface() {
     const [inputText, setInputText] = useState('')
     const [messages, setMessages] = useState<Msg[]>([])
 
-    function sendMessage() {
+    async function sendMessage() {
         setMessages([...messages, {role: 'user', content: inputText}])
-        // Fetch ai for response
-        // get response from AI and show streaming response. 
+        const response = await fetch(`http://${URL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text: inputText })
+        }
+        )
+        const data = await response.json();
+        setMessages([...messages, {role: 'user', content: inputText}, {role: 'agent', content: data.message}]);
         setInputText('')
     }
 

@@ -19,7 +19,7 @@ export function MessageBox({ messages }: MessageBoxProps) {
     return (
         <div className="flex flex-col flex-grow gap-2 border-b-1 overflow-y-auto p-2">
             {messages.map((message, idx) => (
-                <Message idx={idx} message={message}/>
+                <Message key={idx} idx={idx} message={message}/>
             ))}
             <div ref={endOfMessagesRef} />
         </div>
@@ -29,7 +29,7 @@ export function MessageBox({ messages }: MessageBoxProps) {
 function Message({message, idx} : {message: Msg, idx: number}) {
     return (
         <div key={idx} className={`flex w-full p-1 ${message.role=='user'? 'justify-end text-right' : ''}`}>
-            <div className={`flex flex-col w-fit p-1 px-3 ${message.role=='user'?'border border-gray-300 shadow-md rounded-xl': ''} `}>
+            <div className={`flex flex-col w-fit p-1 px-3 ${message.role=='user'?'border border-gray-300 shadow-md rounded-2xl': ''} `}>
                 <p className="text-lg">{message.content}</p>
             </div>
         </div>
