@@ -5,3 +5,6 @@ requests
 httpx
 ollama
 qdrant-client
+fastapi-jwt
+python-jose
+authlib

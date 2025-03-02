@@ -7,7 +7,7 @@ response = ollama.embed(
 )
 
 vector = response['embeddings'][0]
-print('Embeddings: ', vector[:10])
+print('Embeddings: ', vector[:10], "Length", len(vector))
 
 client = QdrantClient(url='http://localhost:6333')
 

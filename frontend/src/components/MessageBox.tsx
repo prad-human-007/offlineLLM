@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export interface Msg {
-    role: 'user' | 'agent'
+    role: 'user' | 'assistant'
     content: string
 }
 

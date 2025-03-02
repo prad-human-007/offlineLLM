@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { MessageBox } from './components/MessageBox'
+
 import { ChatInterface } from './components/ChatInterface'
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className='w-full h-screen p-5'>
+      
       <ChatInterface />
     </div>
   )

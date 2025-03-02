@@ -1,9 +1,11 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends, HTTPException
 from pydantic import BaseModel
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-import requests
-import httpx
+from typing import List, Dict
+from ollama import chat, ChatResponse
+from utils import RequestModel, get_ollama_response
+from fastapi_jwt import JwtAccessBearer
 
 app = FastAPI()
 
@@ -15,40 +17,43 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class TextRequest(BaseModel):
-    text: str
+jwt = JwtAccessBearer(secret_key="my_secret")
+
+# User login model
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
+# Fake user database (replace with real user validation)
+fake_users_db = {
+    "admin": {
+        "password": "123"  # Store hashed passwords in production
+    }
+}
+
+@app.post("/login")
+async def login(user: UserLogin):
+    if user.username not in fake_users_db or fake_users_db[user.username]["password"] != user.password:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    # The error is here - in fastapi_jwt, the subject shouldn't be a string directly
+    # Instead, we need to create a dict with the subject field
+    access_token = jwt.create_access_token(subject={"username": user.username})
+    return {"access_token": access_token}
+
+
 
 @app.get("/")
-async def get_message():
+async def get_message(token: str = Depends(jwt)):
     return {"message": "Hello"}
 
-
-
 @app.post("/")
-async def post_message(request: TextRequest):
-    
-    async with httpx.AsyncClient() as client:
-        response = await client.post(
-            "http://localhost:11434/api/chat",
-            json={
-                "model": "qwen2.5",
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": request.text
-                    }
-                ],
-                "stream": False
-            }
-        )
-        data = response.json()
-        try:
-            message_content = data['message']['content']
-            print("Response: ", message_content)
-            return {'message': message_content}
-        except KeyError:
-            print("Error: Unexpected response structure", data)
-            return {'error': 'Unexpected response structure'}
+async def post_message(request: RequestModel, subject: str = Depends(jwt)): 
+    print("Subject: ", subject['username']) 
+    messages = [{"role": message.role, "content": message.content} for message in request.messages]
+    print("Input Message Length", len(messages))
+    responseMsg = await get_ollama_response(messages=messages)
+    return {"message": responseMsg}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

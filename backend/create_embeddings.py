@@ -90,6 +90,12 @@ print("chunk 1", md_chunks[1])
 
 client = QdrantClient(url='http://localhost:6333')
 
+client.create_collection(
+    collection_name="pdf_data",
+    vectors_config=VectorParams(size=768, distance=Distance.DOT),
+)
+
+md_chunks = md_chunks[:200]
 for idx, chunk in enumerate(md_chunks):
     # print("chunk", chunk[:10],idx)
     response = ollama.embed(
