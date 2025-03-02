@@ -9,18 +9,36 @@ export function ChatInterface() {
     const [messages, setMessages] = useState<Msg[]>([])
 
     async function sendMessage() {
-        setMessages([...messages, {role: 'user', content: inputText}])
+        if (!inputText) return;
+
+        const newMessage: Msg = { role: "user", content: inputText };
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        setInputText('');
+
         const response = await fetch(`http://${URL}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ text: inputText })
+            body: JSON.stringify({ text: inputText }),
+        });
+
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+        let agentMessage: Msg = { role: "agent", content: "" };
+
+        if (reader) {
+            while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            agentMessage.content += decoder.decode(value, { stream: true });
+            setMessages((prevMessages) => {
+                const updatedMessages = [...prevMessages];
+                updatedMessages[updatedMessages.length - 1] = agentMessage;
+                return updatedMessages;
+            });
+            }
         }
-        )
-        const data = await response.json();
-        setMessages([...messages, {role: 'user', content: inputText}, {role: 'agent', content: data.message}]);
-        setInputText('')
     }
 
     return (
