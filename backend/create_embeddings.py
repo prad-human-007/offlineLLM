@@ -9,33 +9,32 @@ import re
 
 
 # Define the directory containing the files
-data_dir = './data/output/'
+data_dir = './data'
 
 # Initialize lists to hold the loaded data
 images = []
 md_content = ""
 json_content = {}
 
-# Load images
-for file_name in os.listdir(data_dir):
-    if file_name.endswith('.png') or file_name.endswith('.jpg') or file_name.endswith('.jpeg'):
-        image_path = os.path.join(data_dir, file_name)
-        images.append(Image.open(image_path))
+# # Load images
+# for file_name in os.listdir(data_dir):
+#     if file_name.endswith('.png') or file_name.endswith('.jpg') or file_name.endswith('.jpeg'):
+#         image_path = os.path.join(data_dir, file_name)
+#         images.append(Image.open(image_path))
 
 # Load markdown file
-md_file_path = os.path.join(data_dir, 'thinkpython.md')
-if os.path.exists(md_file_path):
-    with open(md_file_path, 'r') as md_file:
-        md_content = md_file.read()
 
-# Load JSON file
-json_file_path = os.path.join(data_dir, 'thinkpython_meta.json')
-if os.path.exists(json_file_path):
-    with open(json_file_path, 'r') as json_file:
-        json_content = json.load(json_file)
+with open('./data/ceo/ceo.md', 'r') as md_file:
+    md_content = md_file.read()
+
+# # Load JSON file
+# json_file_path = os.path.join(data_dir, 'thinkpython_meta.json')
+# if os.path.exists(json_file_path):
+#     with open(json_file_path, 'r') as json_file:
+#         json_content = json.load(json_file)
 
 # Print loaded data for verification
-print(f"Loaded {len(images)} images.")
+# print(f"Loaded {len(images)} images.")
 # print(f"Markdown content: {md_content[:100]}...")  # Print first 100 characters
 # print(f"JSON content: {json_content}")
 
@@ -90,51 +89,30 @@ print("chunk 1", md_chunks[1])
 
 client = QdrantClient(url='http://localhost:6333')
 
-client.create_collection(
-    collection_name="pdf_data",
-    vectors_config=VectorParams(size=768, distance=Distance.DOT),
-)
+# client.create_collection(
+#     collection_name="pdf_data",
+#     vectors_config=VectorParams(size=768, distance=Distance.DOT),
+# )
 
 md_chunks = md_chunks[:200]
 for idx, chunk in enumerate(md_chunks):
-    # print("chunk", chunk[:10],idx)
+    print("chunk length", len(chunk))
+    # chunk = chunk[:512]
+    
     response = ollama.embed(
         model='granite-embedding:278m',
         input=chunk
     )
 
     vector = response['embeddings'][0]
-    operation = client.upsert(
-        collection_name='pdf_data',
-        wait=True,
-        points = [
-            PointStruct(id=idx, vector=vector, payload={"text": chunk})
-        ]
-    )
-    print(idx, " Upsert: ", operation)
+    print('VECTOR: ', vector[:10])
+    # operation = client.upsert(
+    #     collection_name='pdf_data',
+    #     wait=True,
+    #     points = [
+    #         PointStruct(id=idx, vector=vector, payload={"text": chunk})
+    #     ]
+    # )
+    # print(idx, " Upsert: ", operation)
 
-# response = ollama.embed(
-#     model='granite-embedding:278m',
-#     input=md_chunks[0]
-# )
-
-# print("embedding len: ", len(response['embeddings'][0]))
-
-# vector = response['embeddings'][0]
-# # norm = np.linalg.norm(vector)
-# # is_normalized = np.isclose(norm, 1.0, atol=1e-3)
-# # print(f"Vector Norm: {norm}")
-# # print(f"Is Normalized? {is_normalized}")
-
-# client = QdrantClient(url='http://localhost:6333')
-# operation = client.upsert(
-#     collection_name='pdf_data',
-#     wait=True,
-#     points = [
-#         PointStruct(id=1, vector=vector, payload={"text": md_chunks[0]})
-#     ]
-# )
-
-
-# print(operation)
 

@@ -8,3 +8,4 @@ qdrant-client
 fastapi-jwt
 python-jose
 authlib
+markdown-to-json

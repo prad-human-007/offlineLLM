@@ -27,7 +27,20 @@ class UserLogin(BaseModel):
 # Fake user database (replace with real user validation)
 fake_users_db = {
     "admin": {
-        "password": "123"  # Store hashed passwords in production
+        "password": "123",  # Store hashed passwords in production
+        "position": "ceo"
+    },
+    "tony": {
+        "password": "123",
+        "position": "ceo"
+    },
+    "sam": {
+        "password": "456",
+        "position": "manager"
+    }, 
+    "rob": {
+        "password": "789",
+        "position": "employee"
     }
 }
 
@@ -49,10 +62,12 @@ async def get_message(token: str = Depends(jwt)):
 
 @app.post("/")
 async def post_message(request: RequestModel, subject: str = Depends(jwt)): 
-    print("Subject: ", subject['username']) 
+    username = subject['username']
+    position = fake_users_db[username]['position']
+    print("Request made by: ", username, "position: ", position) 
     messages = [{"role": message.role, "content": message.content} for message in request.messages]
     print("Input Message Length", len(messages))
-    responseMsg = await get_ollama_response(messages=messages)
+    responseMsg = await get_ollama_response(messages=messages, position=position)
     return {"message": responseMsg}
 
 if __name__ == "__main__":

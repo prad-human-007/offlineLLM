@@ -12,7 +12,7 @@ print('Embeddings: ', vector[:10], "Length", len(vector))
 client = QdrantClient(url='http://localhost:6333')
 
 search_result = client.query_points(
-    collection_name='pdf_data',
+    collection_name='ceo',
     query=vector,
     with_payload=True,
     limit=5
