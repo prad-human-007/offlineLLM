@@ -1,4 +1,4 @@
-# Marker for Creating Embeddings  
+# Offline RAG inplementation with user Autentication 
 
 ## Tech Stack  
 - **Vite, React, Tailwind** (Frontend)  
@@ -29,6 +29,8 @@ Start the FastAPI backend:
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+used Marker library in python for pdf parsing [Marker Github](https://github.com/VikParuchuri/marker)
 
 ## Running the Vite Frontend  
 To start the frontend in development mode:  
