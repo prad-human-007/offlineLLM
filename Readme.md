@@ -16,6 +16,11 @@ docker run --rm --gpus=all \
     qdrant/qdrant:gpu-nvidia-latest
 ```
 
+Put Embeddings Data in Qdrant.
+ - ceo
+ - manager
+ - employee
+
 ## Running Ollama for Embeddings & LLM  
 Start the embedding model and LLM with:  
 

@@ -1,12 +1,31 @@
 import { SendHorizonal } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 import { Msg, MessageBox } from "./MessageBox";
 const URL = '0.0.0.0:8000'
 
+const users: any = {
+    tony: 'CEO',
+    sam: 'Manager',
+    rob: 'Employee'
+}
 
 export function ChatInterface() {
     const [inputText, setInputText] = useState('')
     const [messages, setMessages] = useState<Msg[]>([])
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        const token = localStorage.getItem("token"); // Get JWT token
+        if (token) {
+            try {
+                const decoded: any = jwtDecode(token); // Decode the token
+                setUsername(decoded.subject.username)
+            } catch (error) {
+                console.error("Invalid token", error);
+            }
+        }
+    }, []);
 
     async function sendMessage() {
         if (!inputText) return;
@@ -30,6 +49,10 @@ export function ChatInterface() {
 
     return (
         <div className="flex flex-col w-full h-full border border-gray-500 rounded-2xl">
+            <div className="flex flex-row border-b-1 p-3 items-center justify-between">
+                <div className="text-xl ">{`User:  ${username} - ${users[username]}`}</div>
+                <a href="/login" >Login</a>
+            </div>
             <MessageBox messages={messages}/>
 
             {/* Input Box */}
