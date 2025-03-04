@@ -32,14 +32,20 @@ Implementation of a LLM system, runnning offline on desktop, which can talk to e
 
 
 ## Example 
-- Data - Crated dummy ERP data for demo in SQLite, and demo PDF Files.
+Data - Crated dummy ERP data for demo in SQLite, and demo PDF Files.<br>
+Documnents for Demo
+
+![Demo Docs](./images/demo_docs.png)
+
+Demo
+![Demo](./images/demo.png)
 
 
 ## Tech Stack  
-- **Vite, React, Tailwind** (Frontend)  
-- **FastAPI, Python** (backend for LLM API and Auth)  
-- **Qdrant** (GPU-accelerated vector database)  
-- **Ollama** (Run Embedding model & LLM Locally)  
+- **Vite, React, Tailwind** (Frontend)
+- **FastAPI, Python** (backend for LLM API and Auth)
+- **Qdrant** (GPU-accelerated vector database)
+- **Ollama** (Run Embedding model & LLM Locally)
 
 ## RUN model
 ## Running Qdrant on GPU  

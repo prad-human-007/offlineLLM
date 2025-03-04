@@ -6,6 +6,7 @@ from typing import List, Dict
 from ollama import chat, ChatResponse
 from utils import RequestModel, OllamaUser
 from fastapi_jwt import JwtAccessBearer
+from datetime import timedelta
 
 app = FastAPI()
 
@@ -51,7 +52,7 @@ async def login(user: UserLogin):
     
     # The error is here - in fastapi_jwt, the subject shouldn't be a string directly
     # Instead, we need to create a dict with the subject field
-    access_token = jwt.create_access_token(subject={"username": user.username})
+    access_token = jwt.create_access_token(subject={"username": user.username}, expires_delta=timedelta(minutes=100))
     return {"access_token": access_token}
 
 

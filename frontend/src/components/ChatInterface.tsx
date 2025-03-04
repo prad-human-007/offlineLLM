@@ -14,6 +14,7 @@ export function ChatInterface() {
     const [inputText, setInputText] = useState('')
     const [messages, setMessages] = useState<Msg[]>([])
     const [username, setUsername] = useState("");
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem("token"); // Get JWT token
@@ -32,6 +33,7 @@ export function ChatInterface() {
 
         setMessages((prev) => [...prev, { role: "user", content: inputText }]);
         setInputText('');
+        setLoading(true)
 
         const response = await fetch(`http://${URL}`, {
             method: 'POST',
@@ -44,7 +46,7 @@ export function ChatInterface() {
 
         const {message} = await response.json()
         setMessages((prev) => [...prev, {role: 'assistant', content: message}])
-        
+        setLoading(false)
     }
 
     return (
@@ -53,7 +55,7 @@ export function ChatInterface() {
                 <div className="text-xl ">{`User:  ${username} - ${users[username]}`}</div>
                 <a href="/login" >Login</a>
             </div>
-            <MessageBox messages={messages}/>
+            <MessageBox messages={messages} loading={loading}/>
 
             {/* Input Box */}
             <div className="flex flex-row items-center p-4 gap-2">
