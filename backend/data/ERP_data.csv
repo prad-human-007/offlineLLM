@@ -1,6 +1,104 @@
 Employee ID,Employee Name,Department,Role,Salary
-EMP-101,Alice Johnson,Sales,Sales Manager,4000000
-EMP-102,Bob Williams,Sales,Sales Representative,3200000
-EMP-201,Charlie Davis,Inventory Management,Inventory Specialist,2400000
-EMP-301,Diana Rodriguez,Customer Support,Support Agent,2500000
-EMP-401,Ethan Martinez,Product Development,Product Manager,2500000
+EMP-101,alice,sales,sales manager,4000000
+EMP-102,bob,sales,sales representative,3200000
+EMP-201,charlie,inventory management,inventory specialist,2400000
+EMP-301,diana,customer support,support agent,2500000
+EMP-401,ethan,product development,product manager,2500000
+EMP-103,olivia,sales,sales representative,2500000
+EMP-104,liam,inventory management,inventory specialist,3200000
+EMP-105,sophia,customer support,support agent,4000000
+EMP-106,noah,product development,product manager,2400000
+EMP-107,ava,sales,sales manager,2500000
+EMP-108,william,inventory management,inventory specialist,2500000
+EMP-109,mia,customer support,support agent,3200000
+EMP-110,james,product development,product manager,4000000
+EMP-111,isabella,sales,sales representative,2400000
+EMP-112,benjamin,inventory management,inventory specialist,2500000
+EMP-113,charlotte,customer support,support agent,2500000
+EMP-114,elijah,product development,product manager,3200000
+EMP-115,amelia,sales,sales manager,4000000
+EMP-116,lucas,inventory management,inventory specialist,2400000
+EMP-117,harper,customer support,support agent,2500000
+EMP-118,mason,product development,product manager,2500000
+EMP-119,ella,sales,sales representative,3200000
+EMP-120,logan,inventory management,inventory specialist,4000000
+EMP-121,avery,customer support,support agent,2400000
+EMP-122,jackson,product development,product manager,2500000
+EMP-123,maggie,sales,sales manager,2500000
+EMP-124,owen,inventory management,inventory specialist,3200000
+EMP-125,scarlett,customer support,support agent,4000000
+EMP-126,asher,product development,product manager,2400000
+EMP-127,zoe,sales,sales representative,2500000
+EMP-128,leo,inventory management,inventory specialist,2500000
+EMP-129,lily,customer support,support agent,3200000
+EMP-130,luke,product development,product manager,4000000
+EMP-131,grace,sales,sales manager,2400000
+EMP-132,wyatt,inventory management,inventory specialist,2500000
+EMP-133,chloe,customer support,support agent,2500000
+EMP-134,carter,product development,product manager,3200000
+EMP-135,peyton,sales,sales representative,4000000
+EMP-136,jayden,inventory management,inventory specialist,2400000
+EMP-137,riley,customer support,support agent,2500000
+EMP-138,leo,product development,product manager,2500000
+EMP-139,nora,sales,sales manager,3200000
+EMP-140,caleb,inventory management,inventory specialist,4000000
+EMP-141,gabriella,customer support,support agent,2400000
+EMP-142,ryan,product development,product manager,2500000
+EMP-143,addie,sales,sales representative,2500000
+EMP-144,nathan,inventory management,inventory specialist,3200000
+EMP-145,ella,customer support,support agent,4000000
+EMP-146,zachary,product development,product manager,2400000
+EMP-147,brooklyn,sales,sales manager,2500000
+EMP-148,joseph,inventory management,inventory specialist,2500000
+EMP-149,hazel,customer support,support agent,3200000
+EMP-150,wyatt,product development,product manager,4000000
+EMP-151,audrey,sales,sales representative,2400000
+EMP-152,hunter,inventory management,inventory specialist,2500000
+EMP-153,savannah,customer support,support agent,2500000
+EMP-154,eli,product development,product manager,3200000
+EMP-155,sienna,sales,sales manager,4000000
+EMP-156,landon,inventory management,inventory specialist,2400000
+EMP-157,autumn,customer support,support agent,2500000
+EMP-158,christian,product development,product manager,2500000
+EMP-159,skylar,sales,sales representative,3200000
+EMP-160,jonah,inventory management,inventory specialist,4000000
+EMP-161,violet,customer support,support agent,2400000
+EMP-162,josiah,product development,product manager,2500000
+EMP-163,mackenzie,sales,sales manager,2500000
+EMP-164,colton,inventory management,inventory specialist,3200000
+EMP-165,claire,customer support,support agent,4000000
+EMP-166,lincoln,product development,product manager,2400000
+EMP-167,lucy,sales,sales representative,2500000
+EMP-168,jonathan,inventory management,inventory specialist,2500000
+EMP-169,natalie,customer support,support agent,3200000
+EMP-170,connor,product development,product manager,4000000
+EMP-171,eva,sales,sales manager,2400000
+EMP-172,theodore,inventory management,inventory specialist,2500000
+EMP-173,zoey,customer support,support agent,2500000
+EMP-174,aiden,product development,product manager,3200000
+EMP-175,penelope,sales,sales representative,4000000
+EMP-176,miles,inventory management,inventory specialist,2400000
+EMP-177,aubrey,customer support,support agent,2500000
+EMP-178,julian,product development,product manager,2500000
+EMP-179,maya,sales,sales manager,3200000
+EMP-180,easton,inventory management,inventory specialist,4000000
+EMP-181,eleanor,customer support,support agent,2400000
+EMP-182,nicholas,product development,product manager,2500000
+EMP-183,victoria,sales,sales representative,2500000
+EMP-184,jeremiah,inventory management,inventory specialist,3200000
+EMP-185,anna,customer support,support agent,4000000
+EMP-186,ezekiel,product development,product manager,2400000
+EMP-187,madison,sales,sales manager,2500000
+EMP-188,angel,inventory management,inventory specialist,2500000
+EMP-189,aria,customer support,support agent,3200000
+EMP-190,thomas,product development,product manager,4000000
+EMP-191,leah,sales,sales representative,2400000
+EMP-192,isaiah,inventory management,inventory specialist,2500000
+EMP-193,abigail,customer support,support agent,2500000
+EMP-194,cameron,product development,product manager,3200000
+EMP-195,emily,sales,sales manager,4000000
+EMP-196,jaxon,inventory management,inventory specialist,2400000
+EMP-197,josie,customer support,support agent,2500000
+EMP-198,robert,product development,product manager,2500000
+EMP-199,sarah,sales,sales representative,3200000
+EMP-200,wesley,inventory management,inventory specialist,4000000
