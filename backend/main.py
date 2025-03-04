@@ -4,7 +4,7 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict
 from ollama import chat, ChatResponse
-from utils import RequestModel, get_ollama_response
+from utils import RequestModel, OllamaUser
 from fastapi_jwt import JwtAccessBearer
 
 app = FastAPI()
@@ -62,12 +62,11 @@ async def get_message(token: str = Depends(jwt)):
 
 @app.post("/")
 async def post_message(request: RequestModel, subject: str = Depends(jwt)): 
-    username = subject['username']
-    position = fake_users_db[username]['position']
-    print("Request made by: ", username, "position: ", position) 
+    user = OllamaUser(username=subject['username'], position=fake_users_db[subject['username']]['position'])
+    print("Request made by: ", user.username, "position: ", user.position) 
     messages = [{"role": message.role, "content": message.content} for message in request.messages]
     print("Input Message Length", len(messages))
-    responseMsg = await get_ollama_response(messages=messages, position=position)
+    responseMsg = await user.get_ollama_response(messages=messages)
     return {"message": responseMsg}
 
 if __name__ == "__main__":
