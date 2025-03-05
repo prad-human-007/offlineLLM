@@ -7,6 +7,7 @@ from ollama import chat, ChatResponse
 from utils import RequestModel, OllamaUser
 from fastapi_jwt import JwtAccessBearer
 from datetime import timedelta
+import hashlib
 
 app = FastAPI()
 
@@ -28,26 +29,29 @@ class UserLogin(BaseModel):
 # Fake user database (replace with real user validation)
 fake_users_db = {
     "admin": {
-        "password": "123",  # Store hashed passwords in production
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",  # Store hashed passwords in production
         "position": "ceo"
     },
     "tony": {
-        "password": "123",
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
         "position": "ceo"
     },
     "sam": {
-        "password": "456",
+        "password": "b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0",
         "position": "manager"
     }, 
     "rob": {
-        "password": "789",
+        "password": "35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281",
         "position": "employee"
     }
 }
 
+
+
 @app.post("/login")
 async def login(user: UserLogin):
-    if user.username not in fake_users_db or fake_users_db[user.username]["password"] != user.password:
+    user_password_hash = hashlib.sha256(user.password.encode()).hexdigest()
+    if user.username not in fake_users_db or fake_users_db[user.username]["password"] != user_password_hash:
         raise HTTPException(status_code=401, detail="Invalid username or password")
     
     # The error is here - in fastapi_jwt, the subject shouldn't be a string directly
