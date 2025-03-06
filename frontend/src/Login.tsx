@@ -7,7 +7,7 @@ const Login = () => {
 
 async function loginAction(username: string, password: string) {
 
-  const response = await fetch("http://localhost:8000/login", {
+  const response = await fetch(`http://${window.location.hostname}:8000/login`, {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ async function loginAction(username: string, password: string) {
 const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    const response = await fetch("http://localhost:8000/login", {
+    const response = await fetch(`http://${window.location.hostname}:8000/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

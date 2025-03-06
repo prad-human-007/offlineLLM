@@ -2,7 +2,7 @@ import { SendHorizonal } from "lucide-react";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Msg, MessageBox } from "./MessageBox";
-const URL = '0.0.0.0:8000'
+const URL = `${window.location.hostname}:8000`
 
 const users: any = {
     tony: 'CEO',
