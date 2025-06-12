@@ -1,4 +1,4 @@
-# Offline RAG inplementation with Data Security
+# Offline RAG implementation with Data Security
 
 Implementation of a LLM system, runnning offline on desktop, which can talk to external data souce like ERP system or PDF files, having and extra security layer to restrict access to data based on user role.
 
